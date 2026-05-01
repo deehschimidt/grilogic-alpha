@@ -124,19 +124,71 @@
         </div>
     </section>
 
-    <section id="contato" class="container conversion">
-        <h2 class="section-title">Transforme sua Gestão</h2>
-        <div class="form-skeleton">
-            <h3 style="margin-bottom: 20px;">Solicite um contato</h3>
-            <p style="color: var(--cor-texto-escuro); margin-bottom: 30px;">Na próxima fase, conectaremos este formulário à API (Vercel Serverless).</p>
+<section id="contato" class="container conversion">
+    <h2 class="section-title">Transforme sua Gestão</h2>
+    <div class="form-skeleton">
+        <h3 style="margin-bottom: 20px;">Solicite um contato</h3>
+        
+        <!-- Formulário Funcional -->
+        <form id="leadForm" onsubmit="enviarLead(event)">
+            <input type="text" id="inputNome" class="input-dummy" placeholder="Nome Completo" required>
+            <input type="email" id="inputEmail" class="input-dummy" placeholder="E-mail Corporativo" required>
+            <input type="text" id="inputEmpresa" class="input-dummy" placeholder="Empresa (Opcional)">
             
-            <input type="text" class="input-dummy" placeholder="Nome Completo" disabled>
-            <input type="email" class="input-dummy" placeholder="E-mail Corporativo" disabled>
-            <input type="text" class="input-dummy" placeholder="Empresa" disabled>
-            
-            <button class="btn-primario" style="width: 100%;">Enviar Dados</button>
+            <button type="submit" id="btnSubmit" class="btn-primario" style="width: 100%;">Enviar Dados</button>
+        </form>
+        
+        <!-- Mensagem de Sucesso (Fica escondida até o envio dar certo) -->
+        <div id="mensagemFeedback" style="display: none; margin-top: 20px; color: #25d366; font-weight: bold;">
+            Lead enviado com sucesso! Entraremos em contato em breve.
         </div>
-    </section>
+    </div>
+</section>
+
+<!-- Script de Integração com a nossa API da Vercel -->
+<script>
+    async function enviarLead(event) {
+        event.preventDefault(); // Impede a página de recarregar
+        
+        const btn = document.getElementById('btnSubmit');
+        const form = document.getElementById('leadForm');
+        const feedback = document.getElementById('mensagemFeedback');
+        
+        // Muda o botão para mostrar que está pensando
+        btn.innerText = "Enviando...";
+        btn.disabled = true;
+
+        // Captura os dados digitados
+        const payload = {
+            nome: document.getElementById('inputNome').value,
+            email: document.getElementById('inputEmail').value,
+            empresa: document.getElementById('inputEmpresa').value
+        };
+
+        try {
+            // Envia para o nosso arquivo api/lead.js
+            const response = await fetch('/api/lead', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            if (response.ok) {
+                form.style.display = 'none';
+                feedback.style.display = 'block';
+            } else {
+                alert("Ocorreu um erro ao processar. Tente novamente.");
+                btn.innerText = "Enviar Dados";
+                btn.disabled = false;
+            }
+        } catch (error) {
+            console.error("Erro HTTP:", error);
+            alert("Erro de conexão. Verifique sua internet.");
+            btn.innerText = "Enviar Dados";
+            btn.disabled = false;
+        }
+    }
+</script>
 
     <!-- BOTÃO DO WHATSAPP DIRECIONANDO PARA O NÚMERO DO PDF -->
     <a href="https://wa.me/5541998531440?text=Olá,%20gostaria%20de%20saber%20mais%20sobre%20o%20GRI." target="_blank" class="whatsapp-float" title="Fale no WhatsApp">
