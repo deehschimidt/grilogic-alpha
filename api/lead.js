@@ -6,9 +6,11 @@ export default async function handler(req, res) {
         return res.status(405).json({ message: 'Método não permitido' });
     }
 
-    const { nome, email, empresa } = req.body;
+    // 1. Adicionado o 'telefone' na recepção dos dados do formulário
+    const { nome, email, telefone, empresa } = req.body;
 
-    if (!nome || !email) {
+    // 2. Adicionado o 'telefone' na validação para garantir que a pessoa preencheu
+    if (!nome || !email || !telefone) {
         return res.status(400).json({ message: 'Campos obrigatórios faltando.' });
     }
 
@@ -28,14 +30,19 @@ export default async function handler(req, res) {
         // Montagem do E-mail
         const mailOptions = {
             from: '"GRI Landing Page" <riskgri@gmail.com>', // Quem envia
-            to: 'riskgri@gmail.com', // Quem recebe (pode adicionar mais emails separados por vírgula)
+            to: 'riskgri@gmail.com', // Quem recebe
             subject: `🔥 Novo Lead Capturado: ${empresa || nome}`,
-            text: `Novo lead gerado.\nNome: ${nome}\nE-mail: ${email}\nEmpresa: ${empresa || 'Não informada'}`,
+            
+            // 3. Adicionado o 'telefone' na versão de texto simples
+            text: `Novo lead gerado.\nNome: ${nome}\nE-mail: ${email}\nTelefone: ${telefone}\nEmpresa: ${empresa || 'Não informada'}`,
+            
+            // 4. Adicionado o 'telefone' no visual bonito do e-mail (HTML)
             html: `
                 <div style="font-family: Arial, sans-serif; color: #333; max-width: 600px; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
                     <h2 style="color: #00d2ff; border-bottom: 2px solid #00d2ff; padding-bottom: 10px;">Novo Lead - GRI</h2>
                     <p><strong>Nome:</strong> ${nome}</p>
-                    <p><strong>E-mail:</strong> ${email}</p>
+                    <p><strong>E-mail:</strong> <a href="mailto:${email}">${email}</a></p>
+                    <p><strong>Telefone/Whats:</strong> ${telefone}</p>
                     <p><strong>Empresa:</strong> ${empresa || 'Não informada'}</p>
                     <br>
                     <p style="font-size: 12px; color: #888;">E-mail gerado automaticamente pelo sistema de captação.</p>

@@ -80,6 +80,7 @@
             
             <form id="leadForm" onsubmit="enviarLead(event)">
                 <input type="text" id="inputNome" class="input-dummy" placeholder="Nome Completo" required>
+                <input type="tel" id="inputTelefone" class="input-dummy" placeholder="Telefone / WhatsApp" required>
                 <input type="email" id="inputEmail" class="input-dummy" placeholder="E-mail Corporativo" required>
                 <input type="text" id="inputEmpresa" class="input-dummy" placeholder="Empresa (Opcional)">
                 <button type="submit" id="btnSubmit" class="btn-primario" style="width: 100%;">Enviar Dados</button>
@@ -104,6 +105,7 @@
 
             const payload = {
                 nome: document.getElementById('inputNome').value,
+                telefone: document.getElementById('inputTelefone').value,
                 email: document.getElementById('inputEmail').value,
                 empresa: document.getElementById('inputEmpresa').value
             };
