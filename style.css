@@ -193,12 +193,28 @@ footer {
 }
 
 /* --- ESTILO DAS IMAGENS DO SISTEMA --- */
+/* --- ESTILO E TAMANHO DAS IMAGENS DO SISTEMA --- */
 .img-sistema {
     width: 100%;
+    max-width: 100%;
+    height: auto;
+    display: block;
     border-radius: 8px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4); /* Sombra base */
     border: 1px solid rgba(203, 213, 129, 0.2);
+    cursor: pointer; /* Deixa o mouse com formato de "mãozinha" */
+    
+    /* A mágica da animação suave (0.4 segundos) */
+    transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
 }
+
+/* --- EFEITO HOVER (ZOOM) --- */
+.img-sistema:hover {
+    transform: scale(1.06); /* Aumenta a imagem em 6% */
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6); /* Sombra fica mais forte para parecer que flutuou */
+    border-color: var(--cor-detalhe-verde); /* A borda acende com o verde da paleta */
+}
+
 /* --- SESSÕES COM TEXTO E IMAGEM LADO A LADO --- */
 .feature-row {
     display: flex;
