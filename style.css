@@ -359,3 +359,66 @@ footer {
         padding: 40px 0;
     }
 }
+
+/* --- AJUSTES PARA DISPOSITIVOS MÓVEIS (Telas menores que 768px) --- */
+@media (max-width: 768px) {
+    /* Diminuir o tamanho dos títulos para não quebrarem feio */
+    .hero h1 {
+        font-size: 2.2rem;
+        text-align: center;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+    }
+
+    /* Dar um respiro nas laterais de todo o site */
+    .container {
+        padding: 0 25px;
+    }
+
+    /* Fazer o conteúdo da Hero e das Features empilhar corretamente */
+    .hero, .feature-row {
+        flex-direction: column;
+        text-align: center;
+        padding: 50px 0;
+    }
+
+    /* Garantir que as imagens não fiquem gigantes e tenham margem */
+    .hero-image, .feature-image {
+        max-width: 100%;
+        order: 2; /* Joga a imagem para baixo do texto no mobile */
+    }
+
+    .img-sistema {
+        margin-top: 30px;
+    }
+
+    /* Ajustar os botões para serem mais fáceis de clicar com o polegar */
+    .btn-primario {
+        width: 100%;
+        display: block;
+        text-align: center;
+    }
+
+    /* Ajustar o menu para não ficar amontoado */
+    .nav-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    nav a {
+        margin: 0 10px;
+        font-size: 0.9rem;
+    }
+
+    /* O divisor de marca que adicionamos por último */
+    .brand-divider {
+        flex-direction: column;
+        padding: 30px 0;
+    }
+    
+    .divider-line {
+        display: none; /* Remove as linhas laterais no mobile pra limpar o visual */
+    }
+}
