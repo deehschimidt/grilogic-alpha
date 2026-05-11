@@ -1,20 +1,58 @@
 :root {
-    /* Paleta baseada no seu PDF: Azul dominante e Verde detalhe */
-    --cor-fundo: #0a192f;
-    --cor-primaria: #5d768d;        /* Azul Aço do PDF */
-    --cor-detalhe-verde: #cbd581;   /* Verde Lima do PDF */
-    --cor-texto-claro: #e6f1ff;
-    --cor-texto-escuro: #8892b0;
-    --cor-card: #112240;
-    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    /* Paleta Oficial GRILOGIC */
+    --cor-fundo-dark: #071D49;      /* Azul Marinho Profundo (Base) */
+    --cor-primaria-cyan: #00D2FF;   /* Ciano Vibrante (Destaques e CTAs) */
+    --cor-secundaria-azul: #1E3A8A; /* Azul Intermediário (Cards e Detalhes) */
+    
+    /* Auxiliares */
+    --cor-texto-claro: #FFFFFF;
+    --cor-texto-suave: #CBD5E1;
+    --cor-card-bg: #0B2559;         /* Um tom levemente mais claro que o fundo */
+    
+    font-family: 'Segoe UI', Roboto, sans-serif;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-    background-color: var(--cor-fundo);
+    background-color: var(--cor-fundo-dark);
     color: var(--cor-texto-claro);
-    line-height: 1.6;
+}
+
+/* Títulos com o Ciano da marca */
+h1, .section-title {
+    color: var(--cor-primaria-cyan);
+}
+
+/* Botões com o gradiente que combina as duas cores */
+.btn-primario {
+    background: linear-gradient(135deg, var(--cor-primaria-cyan) 0%, #0095ff 100%);
+    color: var(--cor-fundo-dark);
+    border: none;
+    box-shadow: 0 4px 15px rgba(0, 210, 255, 0.3);
+}
+
+.btn-primario:hover {
+    box-shadow: 0 6px 20px rgba(0, 210, 255, 0.5);
+    filter: brightness(1.1);
+}
+
+/* Cards com borda azul secundária */
+.card {
+    background: var(--cor-card-bg);
+    border: 1px solid rgba(0, 210, 255, 0.1);
+    border-top: 4px solid var(--cor-primaria-cyan);
+}
+
+/* Ajuste do formulário para combinar com o fundo */
+.form-skeleton {
+    background: var(--cor-card-bg);
+    border: 1px solid var(--cor-secundaria-azul);
+}
+
+.input-dummy {
+    background: var(--cor-fundo-dark);
+    border: 1px solid var(--cor-secundaria-azul);
 }
 
 /* --- ESTRUTURA DE LAYOUT --- */
